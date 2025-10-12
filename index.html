@@ -16,9 +16,9 @@
             --bg-dark: #0a0a0a;
             --bg-darker: #0f0f15;
             --bg-dark-accent: #1a1a2a;
-            --primary: #1e40af; /* Azul Escuro */
-            --secondary: #4c1d95; /* Roxo Escuro */
-            --accent: #60a5fa; /* Azul Claro */
+            --primary: #ffffff; /* Azul Escuro */
+            --secondary: #271f92; /* Roxo Escuro */
+            --accent: #053166; /* Azul Claro */
             --primary-gradient: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent)); /* Gradiente com novas cores */
             --text-light: #f0f0f0;
             --text-gray: #a0a0a0;
@@ -99,9 +99,10 @@
             background: var(--bg-dark-accent);
             border-radius: 16px;
             box-shadow: var(--shadow-card);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             overflow: visible; /* Permite que a tag 'popular' transborde */
             position: relative; /* Necessário para o z-index funcionar */
+            border: 2px solid transparent; /* Borda transparente para manter consistência de tamanho */
         }
         .card:hover {
             transform: translateY(-8px);
@@ -207,18 +208,19 @@
         .hero {
             position: relative;
             padding: 10rem 0 8rem 0; /* Ajustei o padding-bottom para 2rem para dar espaço para a nova seção */
-            min-height: 100vh;
+            min-height: 120vh; /* AUMENTADO de 100vh para 120vh */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             overflow: hidden;
-            background: img:  /* NOVA Imagem de fundo */
-            background-size: cover; /* Garante cobertura total */
-            background-position: center; /* Centraliza a imagem */
+            /* Imagem de fundo aplicada diretamente ao herói */
+            background: url('background.png') no-repeat center center; /* Caminho da imagem, repeat, posição */
+            background-size: cover; /* ALTERADO para 'cover' para cobrir o container proporcionalmente */
             z-index: 0; /* Camada da imagem de fundo */
         }
-        .hero::after {
+         /* Novo: Gradiente sobre a imagem de fundo */
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -229,7 +231,7 @@
             z-index: 1; /* Camada do fade, sobre a imagem */
         }
         .hero-content {
-            position: relative; /* Garante que o conteúdo fique acima do ::after */
+            position: relative; /* Garante que o conteúdo fique acima do ::before */
             z-index: 2; /* Camada do conteúdo principal */
             max-width: 800px;
             display: flex;
@@ -271,84 +273,6 @@
         .hero-btns .btn {
             min-width: 200px;
         }
-        .stats {
-            position: relative; /* Garante que as estatísticas também fiquem acima do ::after */
-            z-index: 2; /* Camada das estatísticas */
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin: 2rem 0; /* Espaçamento superior e inferior para as estatísticas */
-        }
-        .stat-item {
-            text-align: center;
-            /* Estilo atualizado para os itens de estatística */
-            background: var(--bg-dark-accent);
-            border: 2px solid var(--border-dark);
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            min-width: 150px; /* Largura mínima para consistência */
-            box-shadow: var(--shadow-card);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-        .stat-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-        .stat-number {
-            font-size: 2.5rem; /* Mantido o tamanho */
-            font-weight: 700;
-            /* Efeito de contorno para melhor legibilidade */
-            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
-            text-stroke: 1px rgba(0, 0, 0, 0.5);
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            display: block;
-            margin-bottom: 0.5rem; /* Espaçamento entre o número e o texto */
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            /* Efeito de contorno para melhor legibilidade */
-            -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.5);
-            text-stroke: 0.5px rgba(0, 0, 0, 0.5);
-        }
-        /* NOVA Seção: Fade e Imagem */
-        .hero-image-section {
-            position: relative;
-            width: 100%;
-            height: 500px; /* Aumentado a altura para 500px (ajuste conforme necessário) */
-            margin-top: 1rem; /* REDUZIDO o margin-top para diminuir o espaço acima da imagem */
-            margin-bottom: 1rem; /* REDUZIDO o margin-bottom para diminuir o espaço abaixo da imagem */
-            overflow: hidden; /* Garante que a imagem não ultrapasse o container */
-            z-index: 1; /* Camada da imagem e fade */
-        }
-        .hero-image-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Degradê escuro de cima para baixo, opaco no topo (onde o texto termina) e transparente na base (onde a imagem começa) */
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 50%, rgba(10, 10, 10, 0) 100%);
-            z-index: 2; /* Camada do fade sobre a imagem */
-        }
-        .hero-image-section img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Faz a imagem cobrir o container mantendo a proporção, centralizada */
-            object-position: center; /* Centraliza a imagem */
-            z-index: 1; /* Camada da imagem */
-        }
         /* Ajuste para garantir que o conteúdo abaixo fique visível */
         .features .section {
             padding-top: 0; /* Remove o padding superior extra se necessário */
@@ -356,6 +280,7 @@
         @media (max-width: 768px) {
             .hero {
                 padding: 6rem 0 1rem 0; /* Ajuste para mobile */
+                min-height: 110vh; /* Ajuste de altura para mobile */
             }
             .hero h1 {
                 font-size: 2.5rem;
@@ -370,22 +295,6 @@
             .hero-btns .btn {
                 width: 100%;
                 max-width: 300px;
-            }
-            .stats {
-                gap: 1.5rem;
-            }
-            .stat-item {
-                min-width: 120px; /* Ajuste para mobile */
-                padding: 1rem 1.5rem;
-            }
-            .stat-number {
-                font-size: 2rem;
-            }
-            /* Ajuste para a imagem de fundo em mobile */
-            .hero-image-section {
-                height: 300px; /* Altura menor para mobile */
-                margin-top: 0.5rem; /* Ajuste adicional para mobile */
-                margin-bottom: 0.5rem; /* Ajuste adicional para mobile */
             }
         }
         /* Features - Ajustado o padding-top */
@@ -455,14 +364,40 @@
         }
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            /* Alterado de repeat(4, 1fr) para repeat(2, 1fr) para 2 colunas em telas grandes */
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
+            padding: 0 1rem; /* Padding horizontal */
+        }
+        /* Ajuste de responsividade para telas menores */
+        @media (max-width: 1200px) {
+          .plans-grid {
+            /* Mantém 2 colunas em telas médias */
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 768px) {
+          .plans-grid {
+            /* Volta para 1 coluna em telas pequenas */
+            grid-template-columns: 1fr;
+            padding: 0 0.5rem; /* Ajuste de padding */
+          }
+          .plan-card.popular {
+            transform: scale(1.03); /* Mantém leve escala no mobile se for o card popular */
+          }
+          /* Ajuste do padding interno dos cards no mobile para evitar aperto */
+          .plan-card {
+            padding: 1.5rem 1rem; /* Reduzido o padding interno para mobile */
+          }
         }
         .plan-card {
-            padding: 3rem 2rem; /* Aumentado o padding interno */
+            padding: 2.5rem 2rem; /* Ajustado o padding interno */
             text-align: center;
             border: 2px solid var(--border-dark);
             z-index: 1; /* Garante que o card fique atrás da tag 'popular' */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .popular-tag {
             position: absolute;
@@ -477,48 +412,75 @@
             font-weight: 600;
             text-transform: uppercase;
             z-index: 2; /* Garante que a tag fique acima do card */
+            box-shadow: var(--shadow-glow);
+            animation: pulse 2s infinite; /* Adiciona animação de pulsação */
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(30, 64, 175, 0.4), 0 0 0 0 rgba(76, 29, 149, 0.2); }
+            70% { box-shadow: 0 0 0 10px rgba(30, 64, 175, 0), 0 0 0 20px rgba(76, 29, 149, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(30, 64, 175, 0), 0 0 0 0 rgba(76, 29, 149, 0); }
         }
         .plan-card.popular {
             border-color: var(--primary); /* Usa a nova cor primária */
-            transform: scale(1.05);
+            transform: scale(1.03); /* Leve aumento para destacar */
             z-index: 10; /* Aumenta o z-index do card popular para garantir sobreposição */
+            box-shadow: var(--shadow-card), inset 0 0 15px rgba(30, 64, 175, 0.1); /* Sombra adicional */
         }
         .plan-card.popular .btn-primary {
             background: var(--primary-gradient); /* Usa o novo gradiente */
         }
         .plan-header h3 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem; /* Ajuste de espaçamento */
+            font-size: 1.5rem; /* Ajuste de tamanho */
         }
         .plan-price {
-            font-size: 2.5rem; /* Ajuste de tamanho para igualar ao número */
-            font-weight: 700;
-            margin: 1rem 0;
+            margin: 1.5rem 0; /* Ajuste de margem */
+            display: flex; /* Alterado para flex para alinhar itens */
+            flex-direction: column; /* Coloca os itens em coluna */
+            align-items: center; /* Centraliza horizontalmente */
+            gap: 0.25rem; /* Espaçamento entre o número e a duração */
         }
         .plan-price .number {
-            font-size: 2.5rem; /* Mesmo tamanho que .plan-price */
+            font-size: 3rem; /* Aumentado o tamanho para destaque */
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .plan-price span {
-            font-size: 1rem;
+        .plan-price .duration {
+            font-size: 1.2rem; /* Ajuste de tamanho para a duração */
             color: var(--text-gray);
-            margin-left: 0.5rem;
+            font-weight: 500; /* Peso de fonte para a duração */
         }
         .plan-savings {
             color: #10b981; /* Green for savings */
             font-weight: 600;
             margin-bottom: 1.5rem;
+            font-size: 1rem; /* Ajuste de tamanho */
         }
         .plan-features {
             list-style: none;
             margin: 2rem 0;
             text-align: left;
+            flex-grow: 1; /* Permite que a lista ocupe o espaço restante */
         }
         .plan-features li {
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
             display: flex;
             align-items: center;
+            border-bottom: 1px solid var(--border-dark); /* Adiciona divisória sutil */
+        }
+        .plan-features li:last-child { /* Remove a borda do último item */
+             border-bottom: none;
         }
         .plan-features li i {
             color: var(--primary); /* Usa a nova cor primária */
+            margin-right: 0.75rem; /* Espaçamento entre ícone e texto */
+            font-size: 1.1rem; /* Ajuste de tamanho do ícone */
+        }
+        .plan-btn-container {
+            margin-top: auto; /* Empurra o botão para o final do card */
         }
         /* Footer */
         footer {
@@ -643,6 +605,133 @@
             margin: 0 auto;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        /* Novo: Banner Promocional (Netflix Style) */
+        .promo-banner {
+            background: var(--bg-dark-accent);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.3s ease;
+        }
+        .promo-banner:hover {
+            transform: translateY(-2px);
+        }
+        .promo-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .promo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .promo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .promo-text strong {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        .promo-text p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin: 0;
+        }
+        .promo-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .promo-btn:hover {
+            opacity: 0.9;
+        }
+        /* Responsividade para o banner */
+        @media (max-width: 768px) {
+            .promo-banner {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem;
+            }
+            .promo-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            .promo-btn {
+                width: 100%;
+                padding: 0.75rem;
+                font-size: 0.9rem;
+                text-align: center;
+            }
+        }
+        /* Estilo para o Carrossel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Ajuste a largura máxima conforme necessário */
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px; /* Borda arredondada */
+            box-shadow: var(--shadow-card); /* Sombra do card */
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* Transição suave ao mudar a imagem */
+        }
+        .carousel-item {
+            min-width: 100%;
+        }
+        .carousel-item img {
+            width: 100%;
+            display: block;
+            height: 400px; /* Ajuste a altura conforme necessário */
+            object-fit: cover; /* Faz a imagem preencher o container mantendo a proporção */
+        }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        .carousel-indicator {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            background: var(--text-gray); /* Cor padrão dos indicadores */
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .carousel-indicator.active {
+            background: var(--primary); /* Cor do indicador ativo (azul escuro no seu tema) */
+        }
+        .carousel-subtitle {
+            text-align: center;
+            margin-top: 1rem; /* Espaçamento entre o carrossel e o subtítulo */
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
     </style>
 </head>
 <body>
@@ -679,35 +768,68 @@
     <!-- Hero -->
     <section id="home" class="hero">
         <div class="hero-content animate-on-scroll">
-            <h1>Desfrute de <span>3.000+ Canais</span> e <span>20.000+ Filmes & Séries</span></h1> <!-- Atualizado o texto do h1 -->
-            <p>Cinebox: A melhor experiência IPTV com qualidade 4K, conexões ilimitadas, todos os streamings, 3.000+ canais ao vivo e 20.000+ filmes e séries.</p> <!-- Atualizado o texto do p -->
-            <!-- NOVO: Seção do fade e imagem -->
-            <div class="hero-image-section">
-                <img src="background.png" alt="Background Cinebox"> <!-- Certifique-se de que 'background.png' está na mesma pasta -->
-            </div>
-            <div class="stats">
-                <div class="stat-item animate-on-scroll">
-                    <span class="stat-number" data-target="3000">0</span> <!-- Mantido o target 3000 -->
-                    <span class="stat-label">Canais Ao Vivo</span>
-                </div>
-                <div class="stat-item animate-on-scroll">
-                    <span class="stat-number" data-target="20000">0</span> <!-- Mantido o target 20000 -->
-                    <span class="stat-label">Filmes & Séries</span>
-                </div>
-                <div class="stat-item animate-on-scroll">
-                    <span class="stat-number">99.9%</span>
-                    <span class="stat-label">Uptime</span>
-                </div>
-            </div>
+            <h1>Desfrute de <span>3.000+ Canais</span> e <span>20.000+ Filmes & Séries</span></h1>
+            <p>Cinebox: A melhor streaming com qualidade 4K, conexões ilimitadas, todos os streamings, 3.000+ canais ao vivo e 20.000+ filmes e séries.</p>
             <div class="hero-btns">
-                <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20solicitar%20o%20teste%20gratuito%20de%206%20horas." class="btn btn-primary">Teste Grátis 6 Horas</a> <!-- Número atualizado -->
+                <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20solicitar%20o%20teste%20gratuito." class="btn btn-primary">Teste Grátis</a> <!-- Número atualizado -->
                 <a href="#plans" class="btn btn-secondary">Ver Planos</a>
             </div>
         </div>
     </section>
+    <!-- Novo: Banner Promocional (Netflix Style) -->
+    <div class="container">
+        <div class="promo-banner">
+            <div class="promo-content">
+                <div class="promo-icon">
+                    <i class="fas fa-film"></i> <!-- Ícone de filme, pode ser alterado -->
+                </div>
+                <div class="promo-text">
+                    <strong>O streaming completo que você vai adorar por apenas R$ 29,90.</strong>
+                    <p>Aproveite nossa opção mais acessível.</p>
+                </div>
+            </div>
+            <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Mensal%20no%20valor%20de%20R%24%2029,00." class="promo-btn">Assinar Agora</a>
+        </div>
+    </div>
+    <!-- Novo: Carrossel de Imagens Automático (sem setas) -->
+    <section id="carousel-section" class="section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Em Alta & Lançamentos</h2>
+                <p class="carousel-subtitle">Confira os destaques do momento!</p> <!-- Breve comentário sobre o carrossel -->
+            </div>
+            <div class="carousel-container" id="autoCarousel">
+                <div class="carousel-inner">
+                    <!-- Imagem 1 - Substitua 'img/filme1.jpg' pela sua imagem -->
+                    <div class="carousel-item active">
+                        <img src="round.png" alt="Filme ou Série 1">
+                    </div>
+                    <!-- Imagem 2 - Substitua 'img/filme2.jpg' pela sua imagem -->
+                    <div class="carousel-item">
+                        <img src="stitch.png" alt="Filme ou Série 2">
+                    </div>
+                    <!-- Imagem 3 - Substitua 'img/filme3.jpg' pela sua imagem -->
+                    <div class="carousel-item">
+                        <img src="superman.png" alt="Filme ou Série 3">
+                    </div>
+                    <!-- Imagem 4 - Substitua 'img/filme4.jpg' pela sua imagem -->
+                    <div class="carousel-item">
+                        <img src="mal.png" alt="Filme ou Série 4">
+                    </div>
+                    <!-- Adicione mais .carousel-item se quiser mais imagens -->
+                </div>
+                <!-- Os indicadores permitem navegação manual -->
+                <div class="carousel-indicators">
+                    <span class="carousel-indicator active" onclick="currentSlide(1)"></span>
+                    <span class="carousel-indicator" onclick="currentSlide(2)"></span>
+                    <span class="carousel-indicator" onclick="currentSlide(3)"></span>
+                    <span class="carousel-indicator" onclick="currentSlide(4)"></span>
+                    <!-- Adicione mais .carousel-indicator se quiser mais imagens -->
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Features -->
-   
-   
     <section id="features" class="features">
         <div class="container">
             <div class="section-title animate-on-scroll">
@@ -717,28 +839,28 @@
             <div class="features-grid">
                 <div class="card feature-card animate-on-scroll">
                     <div class="feature-icon">
-                        <i class="fas fa-satellite-dish"></i>
+                        <img src="tv.png" alt="Canais e Filmes">
                     </div>
-                    <h3>50.000+ Canais</h3>
+                    <h3>3.000+ Canais e 20.000+ Filmes & Séries</h3>
                     <p>Todos os canais de esportes, notícias, filmes, séries e muito mais.</p>
                 </div>
                 <div class="card feature-card animate-on-scroll">
                     <div class="feature-icon">
-                        <i class="fas fa-video"></i>
+                        <img src="4k.png" alt="Qualidade 4K/HD">
                     </div>
                     <h3>Qualidade 4K/HD</h3>
                     <p>Transmissão em alta definição para uma experiência visual imersiva.</p>
                 </div>
                 <div class="card feature-card animate-on-scroll">
                     <div class="feature-icon">
-                        <i class="fas fa-user-friends"></i>
+                        <img src="instalação.png" alt="Facil Instalação">
                     </div>
-                    <h3>Conexões Ilimitadas</h3>
+                    <h3>Facil Instalação</h3>
                     <p>Assista em quantos dispositivos quiser, simultaneamente.</p>
                 </div>
                 <div class="card feature-card animate-on-scroll">
                     <div class="feature-icon">
-                        <i class="fas fa-lock"></i>
+                        <img src="segurança.png" alt="Segurança Total">
                     </div>
                     <h3>Segurança Total</h3>
                     <p>Servidores dedicados e criptografia para proteger sua privacidade.</p>
@@ -882,7 +1004,10 @@
                 <div class="card plan-card animate-on-scroll">
                     <div class="plan-header">
                         <h3>Plano Mensal</h3>
-                        <div class="plan-price">R$ <span class="number">29,00</span><span>/mês</span></div>
+                        <div class="plan-price">
+                            <span class="number">R$ 29,00</span>
+                            <span class="duration">mês</span>
+                        </div>
                     </div>
                     <ul class="plan-features">
                         <li><i class="fas fa-check"></i> 1 Mês de Acesso</li>
@@ -892,13 +1017,18 @@
                         <li><i class="fas fa-check"></i> Conexões Ilimitadas</li>
                         <li><i class="fas fa-check"></i> Suporte 24h</li>
                     </ul>
-                    <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Mensal%20no%20valor%20de%20R%24%2029,00." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    <div class="plan-btn-container">
+                        <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Mensal%20no%20valor%20de%20R%24%2029,00." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    </div>
                 </div>
                 <div class="card plan-card popular animate-on-scroll">
                     <div class="popular-tag">Mais Popular</div>
                     <div class="plan-header">
                         <h3>Plano Trimestral</h3>
-                        <div class="plan-price">R$ <span class="number">79,00</span><span>/3 meses</span></div>
+                        <div class="plan-price">
+                            <span class="number">R$ 79,00</span>
+                            <span class="duration">3 meses</span>
+                        </div>
                         <div class="plan-savings">Economize R$ 8,00</div>
                     </div>
                     <ul class="plan-features">
@@ -909,12 +1039,17 @@
                         <li><i class="fas fa-check"></i> Conexões Ilimitadas</li>
                         <li><i class="fas fa-check"></i> Suporte 24h Prioritário</li>
                     </ul>
-                    <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Trimestral%20no%20valor%20de%20R%24%2079,00." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    <div class="plan-btn-container">
+                        <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Trimestral%20no%20valor%20de%20R%24%2079,00." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    </div>
                 </div>
                 <div class="card plan-card animate-on-scroll">
                     <div class="plan-header">
                         <h3>Plano Semestral</h3>
-                        <div class="plan-price">R$ <span class="number">149,90</span><span>/6 meses</span></div>
+                        <div class="plan-price">
+                            <span class="number">R$ 149,90</span>
+                            <span class="duration">6 meses</span>
+                        </div>
                         <div class="plan-savings">Economize R$ 24,10</div>
                     </div>
                     <ul class="plan-features">
@@ -925,12 +1060,17 @@
                         <li><i class="fas fa-check"></i> Conexões Ilimitadas</li>
                         <li><i class="fas fa-check"></i> Suporte 24h Prioritário</li>
                     </ul>
-                    <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Semestral%20no%20valor%20de%20R%24%20149,90." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    <div class="plan-btn-container">
+                        <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Semestral%20no%20valor%20de%20R%24%20149,90." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    </div>
                 </div>
                 <div class="card plan-card animate-on-scroll">
                     <div class="plan-header">
                         <h3>Plano Anual</h3>
-                        <div class="plan-price">R$ <span class="number">280,00</span><span>/12 meses</span></div>
+                        <div class="plan-price">
+                            <span class="number">R$ 280,00</span>
+                            <span class="duration">12 meses</span>
+                        </div>
                         <div class="plan-savings">Economize R$ 68,00</div>
                     </div>
                     <ul class="plan-features">
@@ -941,7 +1081,9 @@
                         <li><i class="fas fa-check"></i> Conexões Ilimitadas</li>
                         <li><i class="fas fa-check"></i> Suporte 24h Prioritário</li>
                     </ul>
-                    <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Anual%20no%20valor%20de%20R%24%20280,00." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    <div class="plan-btn-container">
+                        <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20assinar%20o%20plano%20Anual%20no%20valor%20de%20R%24%20280,00." class="btn btn-primary">Assinar Agora</a> <!-- Número atualizado -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -956,7 +1098,7 @@
                         <!-- Substitui o span CINEBOX por uma imagem -->
                         <img src="logo.png" alt="Logo Cinebox"> <!-- Certifique-se de que 'logo.png' está na mesma pasta -->
                     </a>
-                    <p>O melhor serviço de IPTV com qualidade premium, variedade e segurança.</p>
+                    <p>O melhor streaming com qualidade premium, variedade e segurança.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -1056,33 +1198,53 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
-        // Animated Counters for Stats
-        const statElements = document.querySelectorAll('.stat-number[data-target]');
-        const statObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const targetElement = entry.target;
-                    const targetValue = parseInt(targetElement.getAttribute('data-target'));
-                    const duration = 2000; // ms
-                    const increment = targetValue / (duration / 16); // 16ms per frame approx
-                    let current = 0;
-                    const updateCounter = () => {
-                        current += increment;
-                        if (current < targetValue) {
-                            targetElement.textContent = Math.floor(current).toLocaleString();
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            targetElement.textContent = targetValue.toLocaleString();
-                        }
-                    };
-                    updateCounter();
-                    statObserver.unobserve(entry.target); // Run only once
-                }
+        // --- Código do Carrossel Automático ---
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        const totalSlides = slides.length;
+        let slideInterval; // Variável para armazenar o intervalo
+        function showSlide(index) {
+            // Ajusta o índice para voltar ao início ou ir ao final se necessário
+            if (index >= totalSlides) currentSlideIndex = 0;
+            else if (index < 0) currentSlideIndex = totalSlides - 1;
+            else currentSlideIndex = index;
+            // Move o carrossel
+            const offset = -currentSlideIndex * 100;
+            document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+            // Atualiza os indicadores
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === currentSlideIndex);
             });
-        }, { threshold: 0.5 });
-        statElements.forEach(el => statObserver.observe(el));
+        }
+        // Função para ir para um slide específico (clicando no indicador)
+        function currentSlide(n) {
+            resetInterval(); // Reinicia o intervalo ao interagir
+            showSlide(n - 1); // n-1 porque os índices do array começam em 0
+        }
+        function resetInterval() {
+            clearInterval(slideInterval); // Limpa o intervalo atual
+            startInterval(); // Reinicia o intervalo
+        }
+        function startInterval() {
+            slideInterval = setInterval(() => {
+                showSlide(currentSlideIndex + 1); // Avança para o próximo slide
+            }, 5000); // 5000 milissegundos = 5 segundos
+        }
+        // Inicializa o carrossel e inicia o intervalo automático
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(currentSlideIndex); // Mostra o primeiro slide
+            startInterval(); // Inicia o auto-avance
+        });
+        // Pausa o auto-avance ao passar o mouse por cima
+        document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        // Reinicia o auto-avance ao tirar o mouse de cima
+        document.querySelector('.carousel-container').addEventListener('mouseleave', () => {
+            startInterval();
+        });
+        // --- Fim do Código do Carrossel ---
     </script>
 </body>
 </html>
-
-
