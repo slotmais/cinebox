@@ -307,15 +307,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         /* --- Estilo para o ícone no Hero (ajustado) --- */
         .hero-icon {
-            width: 298px; /* Ajuste este valor */
-            height: 238px; /* Ajuste este valor */
-            /* Remover 'display: block' ou 'margin: auto' se existirem */
-            /* Manter 'vertical-align: middle' pode não funcionar bem com flex */
-            /* Ajustar tamanho conforme necessário */
-            /* margin-left: 10px; */ /* Remover esta margem se 'gap' for usado no h1 */
-            /* vertical-align: middle; */ /* Remover esta propriedade */
-            /* Manter 'align-self: center' é redundante com align-items no pai (h1) */
+            width: 40px; /* Ajuste este valor */
+            height: 40px; /* Ajuste este valor */
+            /* --- Animação Combinada Float and Pulse --- */
+            animation: floatAndPulse 4s ease-in-out infinite;
+            /* --- Fim da Animação Combinada --- */
         }
+
+        /* --- Keyframes para a Animação Combinada --- */
+        @keyframes floatAndPulse {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-8px) scale(1.05); /* Sobe 8px e cresce 5% */
+            }
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+        }
+        /* --- Fim dos Keyframes --- */
 
         @media (max-width: 768px) {
             .hero {
@@ -329,8 +340,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 gap: 5px; /* Espaçamento reduzido entre o ícone e o texto em mobile */
             }
             .hero-icon {
-                width: 180px; /* Ajuste este valor para mobile */
-                height: 150px; /* Ajuste este valor para mobile */
+                width: 30px; /* Ajuste este valor para mobile */
+                height: 30px; /* Ajuste este valor para mobile */
                 order: -1; /* Coloca o ícone antes do texto na ordem visual */
             }
             .hero-text {
@@ -439,6 +450,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+             /* --- Adicionando imagem de fundo --- */
+            background: var(--bg-dark-accent) url('plan.png') center/cover no-repeat; /* Aplica a imagem de fundo */
+            /* --- Fim da Adição --- */
         }
         .popular-tag {
             position: absolute;
@@ -473,6 +487,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .plan-header h3 {
             margin-bottom: 1rem; /* Ajuste de espaçamento */
             font-size: 1.5rem; /* Ajuste de tamanho */
+            font-family: 'Bebas Neue', cursive; /* Aplica a fonte Bebas Neue */
         }
         .plan-price {
             margin: 1.5rem 0; /* Ajuste de margem */
@@ -488,28 +503,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-family: 'Bebas Neue', cursive; /* Aplica a fonte Bebas Neue */
         }
         .plan-price .duration {
             font-size: 1.2rem; /* Ajuste de tamanho para a duração */
             color: var(--text-gray);
             font-weight: 500; /* Peso de fonte para a duração */
+            font-family: 'Bebas Neue', cursive; /* Aplica a fonte Bebas Neue */
         }
         .plan-savings {
             color: #10b981; /* Green for savings */
             font-weight: 600;
             margin-bottom: 1.5rem;
             font-size: 1rem; /* Ajuste de tamanho */
+            font-family: 'Bebas Neue', cursive; /* Aplica a fonte Bebas Neue */
         }
+        /* --- Centralizando os itens da lista de recursos dos planos --- */
         .plan-features {
             list-style: none;
             margin: 2rem 0;
-            text-align: left;
+            text-align: center; /* Centraliza o texto dentro de cada item */
             flex-grow: 1; /* Permite que a lista ocupe o espaço restante */
         }
         .plan-features li {
             padding: 0.75rem 0;
             display: flex;
             align-items: center;
+            justify-content: center; /* Centraliza o conteúdo do item (ícone + texto) */
             border-bottom: 1px solid var(--border-dark); /* Adiciona divisória sutil */
         }
         .plan-features li:last-child { /* Remove a borda do último item */
@@ -520,6 +540,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             margin-right: 0.75rem; /* Espaçamento entre ícone e texto */
             font-size: 1.1rem; /* Ajuste de tamanho do ícone */
         }
+        /* --- Fim da Centralização dos itens da lista de recursos dos planos --- */
         .plan-btn-container {
             margin-top: auto; /* Empurra o botão para o final do card */
         }
@@ -810,7 +831,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             border-radius: 20px;
             overflow: hidden;
             isolation: isolate;
-            background: var(--card-bg);
+            /* --- Adicionando imagem de fundo --- */
+            background: var(--card-bg) url('card.png') center/cover no-repeat; /* Aplica a imagem de fundo */
+            /* --- Fim da Adição --- */
             border: 1px solid rgba(255, 255, 255, 0.1);
             --pointer-x: 50%;
             --pointer-y: 50%;
@@ -1044,6 +1067,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 margin: 0; /* Remove margem extra */
                 border-radius: 15px;
                 height: 350px; /* Aumenta a altura dos cards em telas menores */
+                 /* --- Adicionando imagem de fundo --- */
+                background: var(--card-bg) url('card.png') center/cover no-repeat; /* Aplica a imagem de fundo */
+                /* --- Fim da Adição --- */
             }
         }
         @media (max-width: 500px) {
@@ -1067,7 +1093,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .features .title {
                 font-size: 1.2rem;
             }
+             .features .card {
+                  /* Reafirma a imagem de fundo para garantir */
+                  background: var(--card-bg) url('card.png') center/cover no-repeat;
+             }
         }
+        /* --- Fim do Estilo para os novos cards de features --- */
         /* --- Estilo do CodePen para Depoimentos (sem dados dos clientes) --- */
         .testimonials .section {
             padding: 8rem 0 5rem 0;
@@ -1107,7 +1138,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         .testimonial-info h4 {
             margin-bottom: 0.25rem;
-            font-size: 1.1rem;
         }
         .testimonial-rating {
             color: #1a1a2a; /* Yellow for stars */
@@ -1377,7 +1407,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="hero-content animate-on-scroll">
             <h1>
                 <!-- O texto agora está diretamente no h1 para receber o gradiente -->
-                Seu universo de filmes e séries em um só lugar, são mais de 3.000 Canais Ao Vivo e 23.000 Filmes e Séries.
+                Seu universo de filmes e séries em um só lugar.
                 <img src="box.png" alt="Ícone Hero" class="hero-icon"> <!-- Ícone adicionado -->
             </h1>
             <p>Cinebox: A melhor experiência em qualidade 4K, são mais de 23k de titulos da atualidade.</p>
@@ -1502,8 +1532,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-title animate-on-scroll">
-                <h2></h2>
-                <p></p>
+                <h2>Depoimentos</h2>
+                <p>O que nossos clientes dizem sobre o Cinebox</p>
             </div>
             <div class="testim">
                 <div class="wrap">
