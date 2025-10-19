@@ -249,15 +249,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.1;
-            /* Efeito de contorno para melhor legibilidade */
-            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
-            text-stroke: 1px rgba(0, 0, 0, 0.5);
-            color: white; /* Cor base antes do gradiente */
+            font-family: 'Bebas Neue', cursive; /* Aplica a fonte Bebas Neue */
+            /* --- Efeito de gradiente animado (baseado no CodePen) --- */
             background: var(--primary-gradient);
+            background-size: 200% 100%; /* Tamanho maior para a animação */
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-fill-color: transparent;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback */
+            animation: textShine 3s linear infinite; /* Animação do gradiente */
+            /* --- Fim do Efeito de gradiente animado --- */
+            /* --- Efeito Neon de Alta Qualidade (Ainda mais reduzido) --- */
+            text-shadow:
+                0 0 1px #fff,
+                0 0 2px rgba(30, 64, 175, 0.4), /* Azul do gradiente */
+                0 0 4px rgba(76, 29, 149, 0.4); /* Roxo do gradiente */
+            /* --- Fim do Efeito Neon (Ainda mais reduzido) --- */
             /* --- Alterações para alinhar o ícone --- */
             display: flex; /* Transforma o h1 em um container flexível */
             align-items: center; /* Alinha os itens verticalmente ao centro */
@@ -267,21 +274,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             /* --- Fim das Alterações para alinhar o ícone --- */
         }
 
-        .hero-text {
-            /* Estilo para o texto dentro do h1 */
-            /* Mantém os estilos de gradiente do h1 */
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            /* Pode adicionar outros estilos específicos do texto aqui se necessário */
+        /* Animação para o efeito de gradiente */
+        @keyframes textShine {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
         }
 
         .hero h1 span {
-            /* O span herda as propriedades do .hero-text */
+            /* O span herda as propriedades do h1 */
         }
-
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 2.5rem; /* Espaçamento inferior aumentado para separar do fade */
@@ -306,8 +307,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         /* --- Estilo para o ícone no Hero (ajustado) --- */
         .hero-icon {
-            width: 290px; /* Ajuste este valor */
-            height: 270px; /* Ajuste este valor */
+            width: 298px; /* Ajuste este valor */
+            height: 238px; /* Ajuste este valor */
             /* Remover 'display: block' ou 'margin: auto' se existirem */
             /* Manter 'vertical-align: middle' pode não funcionar bem com flex */
             /* Ajustar tamanho conforme necessário */
@@ -328,8 +329,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 gap: 5px; /* Espaçamento reduzido entre o ícone e o texto em mobile */
             }
             .hero-icon {
-                width: 230px; /* Ajuste este valor para mobile */
-                height: 198px; /* Ajuste este valor para mobile */
+                width: 180px; /* Ajuste este valor para mobile */
+                height: 150px; /* Ajuste este valor para mobile */
                 order: -1; /* Coloca o ícone antes do texto na ordem visual */
             }
             .hero-text {
@@ -1375,7 +1376,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section id="home" class="hero">
         <div class="hero-content animate-on-scroll">
             <h1>
-                <span class="hero-text">Seu universo de filmes e séries em um só lugar.</span>
+                <!-- O texto agora está diretamente no h1 para receber o gradiente -->
+                Seu universo de filmes e séries em um só lugar, são mais de 3.000 Canais Ao Vivo e 23.000 Filmes e Séries.
                 <img src="box.png" alt="Ícone Hero" class="hero-icon"> <!-- Ícone adicionado -->
             </h1>
             <p>Cinebox: A melhor experiência em qualidade 4K, são mais de 23k de titulos da atualidade.</p>
