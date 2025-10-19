@@ -222,7 +222,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             text-align: center;
             overflow: hidden;
             /* Imagem de fundo aplicada diretamente ao herói */
-            background: url('background.png') no-repeat center center; /* Caminho da imagem, repeat, posição */
+            background: url('background2.png') no-repeat center center; /* Caminho da imagem, repeat, posição */
             background-size: cover; /* ALTERADO para 'cover' para cobrir o container proporcionalmente */
             z-index: 0; /* Camada da imagem de fundo */
         }
@@ -258,10 +258,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
+            /* --- Alterações para alinhar o ícone --- */
+            display: flex; /* Transforma o h1 em um container flexível */
+            align-items: center; /* Alinha os itens verticalmente ao centro */
+            justify-content: center; /* Alinha o conteúdo (texto + ícone) ao centro horizontalmente */
+            gap: 10px; /* Espaçamento entre o texto e o ícone */
+            text-align: center; /* Mantém o texto centralizado dentro do seu próprio espaço se necessário */
+            /* --- Fim das Alterações para alinhar o ícone --- */
         }
+
+        .hero-text {
+            /* Estilo para o texto dentro do h1 */
+            /* Mantém os estilos de gradiente do h1 */
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            /* Pode adicionar outros estilos específicos do texto aqui se necessário */
+        }
+
         .hero h1 span {
-            /* O span herda as propriedades do h1 */
+            /* O span herda as propriedades do .hero-text */
         }
+
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 2.5rem; /* Espaçamento inferior aumentado para separar do fade */
@@ -284,6 +304,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .features .section {
             padding-top: 0; /* Remove o padding superior extra se necessário */
         }
+        /* --- Estilo para o ícone no Hero (ajustado) --- */
+        .hero-icon {
+            width: 290px; /* Ajuste este valor */
+            height: 270px; /* Ajuste este valor */
+            /* Remover 'display: block' ou 'margin: auto' se existirem */
+            /* Manter 'vertical-align: middle' pode não funcionar bem com flex */
+            /* Ajustar tamanho conforme necessário */
+            /* margin-left: 10px; */ /* Remover esta margem se 'gap' for usado no h1 */
+            /* vertical-align: middle; */ /* Remover esta propriedade */
+            /* Manter 'align-self: center' é redundante com align-items no pai (h1) */
+        }
+
         @media (max-width: 768px) {
             .hero {
                 padding: 6rem 0 1rem 0; /* Ajuste para mobile */
@@ -291,19 +323,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             }
             .hero h1 {
                 font-size: 2.5rem;
+                /* gap: 8px; */ /* Ajuste fino do espaçamento em mobile se necessário */
+                flex-direction: column; /* Muda a direção do layout para coluna em mobile */
+                gap: 5px; /* Espaçamento reduzido entre o ícone e o texto em mobile */
             }
-            .hero p {
-                font-size: 1.2rem;
+            .hero-icon {
+                width: 230px; /* Ajuste este valor para mobile */
+                height: 198px; /* Ajuste este valor para mobile */
+                order: -1; /* Coloca o ícone antes do texto na ordem visual */
             }
-            .hero-btns {
-                flex-direction: column;
-                align-items: center;
-            }
-            .hero-btns .btn {
-                width: 100%;
-                max-width: 300px;
+            .hero-text {
+                font-size: 2.3rem; /* Ajuste o tamanho do texto para mobile se necessário */
             }
         }
+        /* --- Fim do Estilo para o ícone no Hero (ajustado) --- */
         /* Features - Ajustado o padding-top */
         .features .section {
             padding: 4rem 0 5rem 0; /* Ajustado o padding-top de 8rem para 4rem */
@@ -1341,7 +1374,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Hero -->
     <section id="home" class="hero">
         <div class="hero-content animate-on-scroll">
-            <h1>Seu universo de filmes e séries em um só lugar.</h1>
+            <h1>
+                <span class="hero-text">Seu universo de filmes e séries em um só lugar.</span>
+                <img src="box.png" alt="Ícone Hero" class="hero-icon"> <!-- Ícone adicionado -->
+            </h1>
             <p>Cinebox: A melhor experiência em qualidade 4K, são mais de 23k de titulos da atualidade.</p>
             <div class="hero-btns">
                 <a href="https://wa.me/5587999423220?text=Olá,%20gostaria%20de%20solicitar%20o%20teste%20gratuito." class="btn btn-primary">Teste Grátis</a> <!-- Número atualizado -->
@@ -1941,3 +1977,4 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
 </body>
 </html>
+
