@@ -273,13 +273,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             text-align: center; /* Mantém o texto centralizado dentro do seu próprio espaço se necessário */
             /* --- Fim das Alterações para alinhar o ícone --- */
         }
-
         /* Animação para o efeito de gradiente */
         @keyframes textShine {
             0% { background-position: -100% 0; }
             100% { background-position: 100% 0; }
         }
-
         .hero h1 span {
             /* O span herda as propriedades do h1 */
         }
@@ -309,25 +307,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .hero-icon {
             width: 300px; /* Ajuste este valor */
             height: 250px; /* Ajuste este valor */
-            /* --- Animação Combinada Float and Pulse --- */
-            animation: floatAndPulse 4s ease-in-out infinite;
+            /* --- Animação Combinada Float and Pulse REMOVIDA --- */
             /* --- Fim da Animação Combinada --- */
         }
-
-        /* --- Keyframes para a Animação Combinada --- */
-        @keyframes floatAndPulse {
-            0% {
-                transform: translateY(0px) scale(1);
-            }
-            50% {
-                transform: translateY(-8px) scale(1.05); /* Sobe 8px e cresce 5% */
-            }
-            100% {
-                transform: translateY(0px) scale(1);
-            }
-        }
+        /* --- Keyframes para a Animação Combinada REMOVIDOS --- */
         /* --- Fim dos Keyframes --- */
-
         @media (max-width: 768px) {
             .hero {
                 padding: 6rem 0 1rem 0; /* Ajuste para mobile */
@@ -2009,5 +1993,4 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
 </body>
 </html>
-
 
