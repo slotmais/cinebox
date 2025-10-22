@@ -778,18 +778,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-size: 1rem;
             color: var(--text-gray);
         }
-        /* --- Estilo para os novos cards de features --- */
+        /* --- Estilo para os novos cards de features (Simplificado) --- */
         :root {
             --card-height: 320px; /* Ajustado para 320px */
             --card-width: calc(var(--card-height) / 1.5); /* ~213.33px */
-            /* Variáveis para o efeito neon - VALORES AJUSTADOS PARA SEREM MAIS SENSÍVEIS */
-            --glow-sens: 5; /* Era 10, agora é 5 - mais sensível */
-            --color-sens: calc(var(--glow-sens) + 15); /* Era 25 (10+15), agora é 20 (5+15) - mais sensível */
-            --glow-color: 280deg 100% 80%;
-            --glow-blend: plus-lighter;
             --card-bg: #191c29;
-            --dark: #191c29;
-            --fg: white;
         }
         .features .section {
             padding: 4rem 0 5rem 0;
@@ -819,106 +812,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background: var(--card-bg) url('card.jpg') center/cover no-repeat; /* Aplica a imagem de fundo */
             /* --- Fim da Adição --- */
             border: 1px solid rgba(255, 255, 255, 0.1);
-            --pointer-x: 50%;
-            --pointer-y: 50%;
-            --pointer-°: 0deg;
-            --pointer-d: 0;
-            box-shadow: none; /* Remove a sombra padrão do card */
-            transform: none; /* Remove a transformação padrão do card */
+            box-shadow: var(--shadow-card);
         }
         .features .card:hover {
-            transform: none; /* Não aplica a transformação padrão no hover */
-        }
-        .features .card::before,
-        .features .card::after,
-        .features .card .glow {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            transition: opacity 0.25s ease-out;
-            z-index: -1;
-        }
-        .features .card:not(:hover) .glow,
-        .features .card:not(:hover)::before,
-        .features .card:not(:hover)::after {
-            opacity: 0;
-            transition: opacity 0.75s ease-in-out;
-        }
-        .features .card::before {
-            border: 1px solid transparent;
-            background:
-                linear-gradient(var(--card-bg) 0 100%) padding-box,
-                linear-gradient(rgba(255,255,255,0) 0 100%) border-box,
-                radial-gradient(at 80% 55%, hsla(268,100%,76%,1) 0px, transparent 50%) border-box,
-                radial-gradient(at 69% 34%, hsla(349,100%,74%,1) 0px, transparent 50%) border-box,
-                radial-gradient(at 8% 6%, hsla(136,100%,78%,1) 0px, transparent 50%) border-box,
-                radial-gradient(at 41% 38%, hsla(192,100%,64%,1) 0px, transparent 50%) border-box,
-                radial-gradient(at 86% 85%, hsla(186,100%,74%,1) 0px, transparent 50%) border-box,
-                radial-gradient(at 82% 18%, hsla(52,100%,65%,1) 0px, transparent 50%) border-box,
-                radial-gradient(at 51% 4%, hsla(12,100%,72%,1) 0px, transparent 50%) border-box,
-                linear-gradient(#c299ff 0 100%) border-box;
-            opacity: calc((var(--pointer-d) - var(--color-sens)) / (100 - var(--color-sens)));
-            mask-image: conic-gradient(from var(--pointer-°) at center, black 25%, transparent 40%, transparent 60%, black 75%);
-        }
-        .features .card::after {
-            border: 1px solid transparent;
-            background:
-                radial-gradient(at 80% 55%, hsla(268,100%,76%,1) 0px, transparent 50%) padding-box,
-                radial-gradient(at 69% 34%, hsla(349,100%,74%,1) 0px, transparent 50%) padding-box,
-                radial-gradient(at 8% 6%, hsla(136,100%,78%,1) 0px, transparent 50%) padding-box,
-                radial-gradient(at 41% 38%, hsla(192,100%,64%,1) 0px, transparent 50%) padding-box,
-                radial-gradient(at 86% 85%, hsla(186,100%,74%,1) 0px, transparent 50%) padding-box,
-                radial-gradient(at 82% 18%, rgb(58, 45, 247) 0px, transparent 50%) padding-box,
-                radial-gradient(at 51% 4%, hsla(12,100%,72%,1) 0px, transparent 50%) padding-box,
-                linear-gradient(#c299ff 0 100%) padding-box;
-            mask-image:
-                linear-gradient(to bottom, black, black),
-                radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
-                radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
-                radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
-                radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
-                radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
-                conic-gradient(from var(--pointer-°) at center, transparent 5%, black 15%, black 85%, transparent 95%);
-            mask-composite: subtract,add,add,add,add,add;
-            opacity: calc((var(--pointer-d) - var(--color-sens)) / (100 - var(--color-sens)));
-            mix-blend-mode: soft-light;
-        }
-        .features .card .glow {
-            --outset: 10px;
-            inset: calc(var(--outset) * -1);
-            pointer-events: none;
-            z-index: 1;
-            mask-image: conic-gradient(from var(--pointer-°) at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%);
-            opacity: calc((var(--pointer-d) - var(--glow-sens)) / (100 - var(--glow-sens)));
-            mix-blend-mode: var(--glow-blend);
-        }
-        .features .card .glow::before {
-            content: "";
-            position: absolute;
-            inset: var(--outset);
-            border-radius: inherit;
-            box-shadow:
-                inset 0 0 0 1px hsl(var(--glow-color) / 100%),
-                inset 0 0 2px 2px hsl(var(--glow-color) / 90%),
-                inset 0 0 5px 1px hsl(var(--glow-color) / 75%),
-                inset 0 0 8px 1px hsl(var(--glow-color) / 66%),
-                inset 0 0 15px 0 hsl(var(--glow-color) / 50%),
-                inset 0 0 25px 2px hsl(var(--glow-color) / 30%),
-                inset 0 0 50px 2px hsl(var(--glow-color) / 10%),
-                0 0 2px 2px hsl(var(--glow-color) / 90%),
-                0 0 5px 1px hsl(var(--glow-color) / 75%),
-                0 0 8px 1px hsl(var(--glow-color) / 66%),
-                0 0 15px 0 hsl(var(--glow-color) / 50%),
-                0 0 25px 2px hsl(var(--glow-color) / 30%),
-                0 0 50px 2px hsl(var(--glow-color) / 10%);
+            transform: translateY(-5px); /* Leve elevação no hover */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
         }
         .features .wrapper {
             position: absolute;
             width: 100%;
             height: 100%;
             z-index: 1;
-            transition: all 0.5s ease;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -927,81 +831,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             padding: 20px;
             box-sizing: border-box;
         }
-        .features .card:hover .wrapper {
-            transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
-            box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
-        }
-        .features .wrapper::before,
-        .features .wrapper::after {
-            content: "";
-            opacity: 0;
-            width: 100%;
-            height: 80px;
-            transition: all 0.5s;
-            position: absolute;
-            left: 0;
-            border-radius: 20px;
-        }
-        .features .wrapper::before {
-            top: 0;
-            height: 100%;
-            background-image: linear-gradient(
-                to top,
-                transparent 46%,
-                rgba(12, 13, 19, 0.5) 68%,
-                rgba(12, 13, 19) 97%
-            );
-        }
-        .features .wrapper::after {
-            bottom: 0;
-            opacity: 1;
-            background-image: linear-gradient(
-                to bottom,
-                transparent 46%,
-                rgba(12, 13, 19, 0.5) 68%,
-                rgba(12, 13, 19) 97%
-            );
-        }
-        .features .card:hover .wrapper::before,
-        .features .card:hover .wrapper::after {
-            opacity: 1;
-        }
-        .features .card:hover .wrapper::after {
-            height: 120px;
-        }
         .features .floating-icon {
-            width: 70px; /* Tamanho menor para caber com o texto */
+            width: 70px; /* Tamanho do ícone */
             height: 70px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             opacity: 1; /* Sempre visível */
-            transition: transform 0.3s ease;
             z-index: 2;
             pointer-events: none;
             margin-bottom: 10px; /* Espaço entre o ícone e o texto */
         }
-        .features .card:hover .floating-icon {
-            transform: translateZ(50px) scale(1.1);
-        }
         .features .title {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            text-align: center;
             color: white;
             font-weight: bold;
             font-size: 1.1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease 0.1s;
             z-index: 3;
             font-family: 'Bebas Neue', cursive;
-        }
-        .features .card:hover .title {
-            opacity: 1;
-            transform: translateY(0) translateZ(20px);
+            margin-top: 10px; /* Espaço entre o ícone e o título */
         }
         .features .card-text {
             color: white;
@@ -1012,6 +859,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             z-index: 2;
             max-width: 90%;
             font-family: 'Bebas Neue', cursive;
+            text-align: center; /* Centraliza o texto */
         }
         .features .card-text h3 {
             margin: 0 0 5px 0;
@@ -1082,7 +930,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   background: var(--card-bg) url('card.jpg') center/cover no-repeat;
              }
         }
-        /* --- Fim do Estilo para os novos cards de features --- */
+        /* --- Fim do Estilo para os novos cards de features (Simplificado) --- */
         /* --- Estilo do CodePen para Depoimentos (sem dados dos clientes) --- */
         .testimonials .section {
             padding: 8rem 0 5rem 0;
@@ -1469,9 +1317,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <h3>Qualidade 4K/FHD</h3>
                             <p>Alta definição para uma experiência visual imersiva.</p>
                         </div>
+                        <div class="title"></div>
                     </div>
-                    <div class="title"></div>
-                    <div class="glow"></div> <!-- Elemento para o efeito neon -->
                 </div>
                 <!-- Card 2 -->
                 <div class="card">
@@ -1481,9 +1328,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <h3>Facil Instalação</h3>
                             <p>Compatível com todas Smarts TV, TV Box e Android TV.</p>
                         </div>
+                        <div class="title"></div>
                     </div>
-                    <div class="title"></div>
-                    <div class="glow"></div> <!-- Elemento para o efeito neon -->
                 </div>
                 <!-- Card 3 -->
                 <div class="card">
@@ -1493,9 +1339,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <h3>Segurança Total</h3>
                             <p>Servidores dedicados e criptografia para proteger sua privacidade.</p>
                         </div>
+                        <div class="title"></div>
                     </div>
-                    <div class="title"></div>
-                    <div class="glow"></div> <!-- Elemento para o efeito neon -->
                 </div>
                 <!-- Card 4 -->
                 <div class="card">
@@ -1505,9 +1350,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <h3>Canais, Filmes & Séries</h3>
                             <p>Esporte, notícias, filmes, séries e muito mais.</p>
                         </div>
+                        <div class="title"></div>
                     </div>
-                    <div class="title"></div>
-                    <div class="glow"></div> <!-- Elemento para o efeito neon -->
                 </div>
             </div>
         </div>
@@ -1844,73 +1688,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             startInterval();
         });
         // --- Fim do Código do Carrossel ---
-        // --- Código para os novos cards de features ---
-        // Função para calcular a posição e ângulo do mouse em relação ao card
-        const centerOfElement = ($el) => {
-            const { width, height } = $el.getBoundingClientRect();
-            return [width / 2, height / 2];
-        };
-        const pointerPositionRelativeToElement = ($el, e) => {
-            const { left, top, width, height } = $el.getBoundingClientRect();
-            // Usando touches[0] para eventos de toque
-            const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : e.changedTouches[0].clientX);
-            const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : e.changedTouches[0].clientY);
-            const x = clientX - left;
-            const y = clientY - top;
-            const px = ((x / width) * 100).toFixed(2);
-            const py = ((y / height) * 100).toFixed(2);
-            return { pixels: [x, y], percent: [parseFloat(px), parseFloat(py)] };
-        };
-        const angleFromPointerEvent = ($el, dx, dy) => {
-            let angleRadians = 0;
-            let angleDegrees = 0;
-            if (dx !== 0 || dy !== 0) {
-                angleRadians = Math.atan2(dy, dx);
-                angleDegrees = angleRadians * (180 / Math.PI) + 90;
-                if (angleDegrees < 0) angleDegrees += 360;
-            }
-            return angleDegrees;
-        };
-        const distanceFromCenter = ($card, x, y) => {
-            const [cx, cy] = centerOfElement($card);
-            return [x - cx, y - cy];
-        };
-        const closenessToEdge = ($card, x, y) => {
-            const [cx, cy] = centerOfElement($card);
-            const [dx, dy] = distanceFromCenter($card, x, y);
-            let k_x = Infinity;
-            let k_y = Infinity;
-            if (dx !== 0) k_x = cx / Math.abs(dx);
-            if (dy !== 0) k_y = cy / Math.abs(dy);
-            const edge = Math.min(k_x, k_y);
-            return Math.min(1, 1 / edge);
-        };
-        const round = (value, precision = 3) => parseFloat(value.toFixed(precision));
-        const clamp = (value, min = 0, max = 100) => Math.min(Math.max(value, min), max);
-        // Adicionando o efeito neon a cada card
-        document.querySelectorAll('.features .card').forEach(card => {
-            const cardUpdate = (e) => {
-                // REMOVIDO o preventDefault para não interferir na rolagem
-                // if (e.type === 'touchmove') {
-                //     e.preventDefault();
-                // }
-                const position = pointerPositionRelativeToElement(card, e);
-                const [px, py] = position.pixels;
-                const [perx, pery] = position.percent;
-                const [dx, dy] = distanceFromCenter(card, px, py);
-                const edge = closenessToEdge(card, px, py);
-                const angle = angleFromPointerEvent(card, dx, dy);
-                card.style.setProperty('--pointer-x', `${round(perx)}%`);
-                card.style.setProperty('--pointer-y', `${round(pery)}%`);
-                card.style.setProperty('--pointer-°', `${round(angle)}deg`);
-                card.style.setProperty('--pointer-d', `${round(edge * 100)}`);
-            };
-            card.addEventListener("pointermove", cardUpdate);
-            // Adicionando evento touchstart para ativar o efeito ao tocar
-            card.addEventListener("touchstart", cardUpdate);
-            // Adicionando evento touchmove para dispositivos móveis - não previne rolagem
-            card.addEventListener("touchmove", cardUpdate, { passive: true });
-        });
         document.addEventListener('DOMContentLoaded', function() {
             'use strict';
             var testim = document.getElementById("testim"),
